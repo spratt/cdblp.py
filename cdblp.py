@@ -6,6 +6,8 @@ parser.add_argument('-a', '--author', help='Author name',
                     default='Timothy M. Chan')
 parser.add_argument('-p', '--publication', help='Publication name',
                     default='Foundations of Computer Science, FOCS')
+parser.add_argument('-d', '--debug', help="Debug mode",
+                    action="store_true")
 args=parser.parse_args()
 ################################################################################
 name=args.author.replace('.','=')
@@ -15,13 +17,14 @@ first='_'.join(names[:len(names)-1])
 initial=last[0].lower()
 publications=list(map(str.strip, args.publication.split(',')))
 ################################################################################
-print('AUTHOR:        {}'.format(args.author))
-print('SEARCHING FOR: {}'.format(args.publication))
-################################################################################
 import urllib.request
 url='http://dblp.uni-trier.de/pers/xx/{}/{}:{}.xml'.format(initial,last,first)
-print('URL:           {}'.format(url))
 xmlstr=urllib.request.urlopen(url).read().decode('utf-8')
+################################################################################
+if args.debug:
+    print('AUTHOR:        {}'.format(args.author))
+    print('SEARCHING FOR: {}'.format(args.publication))
+    print('URL:           {}'.format(url))
 ################################################################################
 import xml.etree.ElementTree as ET
 root = ET.fromstring(xmlstr)
