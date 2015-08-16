@@ -1,0 +1,11 @@
+cdblp.py
+========
+
+Count publications on DBLP.
+
+
+RUN
+---
+
+./cdblp.py -a="Simon Pratt" \
+-p="Canadian Conference on Computational Geometry, CCCG"
